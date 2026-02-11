@@ -26,7 +26,8 @@ Gain hands-on experience with aggregations, window functions, and CTEs
 Database Creation
 
 '''sql
-CREATE DATABASE Sql_project_1; '''
+CREATE DATABASE Sql_project_1; 
+'''
 
 
 Table Creation
@@ -45,26 +46,30 @@ CREATE TABLE retail_sales
     price_per_unit FLOAT,
     cogs FLOAT,
     total_sale FLOAT
-); '''
+); 
+'''
 
 2️⃣ Data Exploration & Cleaning
 
 Total Records
 
 '''sql
-SELECT COUNT(*) FROM retail_sales; '''
+SELECT COUNT(*) FROM retail_sales; 
+'''
 
 
 Unique Customers
 
 '''sql
-SELECT COUNT(DISTINCT customer_id) FROM retail_sales; '''
+SELECT COUNT(DISTINCT customer_id) FROM retail_sales; 
+'''
 
 
 Unique Categories
 
 '''sql
-SELECT DISTINCT category FROM retail_sales; '''
+SELECT DISTINCT category FROM retail_sales; 
+'''
 
 
 Null Value Check
@@ -75,7 +80,8 @@ FROM retail_sales
 WHERE 
     sale_date IS NULL OR sale_time IS NULL OR customer_id IS NULL OR
     gender IS NULL OR age IS NULL OR category IS NULL OR
-    quantity IS NULL OR price_per_unit IS NULL OR cogs IS NULL; '''
+    quantity IS NULL OR price_per_unit IS NULL OR cogs IS NULL; 
+    '''
 
 
 Remove Records with Missing Data
@@ -85,14 +91,16 @@ DELETE FROM retail_sales
 WHERE 
     sale_date IS NULL OR sale_time IS NULL OR customer_id IS NULL OR
     gender IS NULL OR age IS NULL OR category IS NULL OR
-    quantity IS NULL OR price_per_unit IS NULL OR cogs IS NULL; '''
+    quantity IS NULL OR price_per_unit IS NULL OR cogs IS NULL; 
+    '''
 
 📈 Data Analysis & Business Questions
 🔹 Sales on a Specific Date
 '''sql
 SELECT *
 FROM retail_sales
-WHERE sale_date = '2022-11-05'; '''
+WHERE sale_date = '2022-11-05'; 
+'''
 
 🔹 Clothing Transactions (Nov 2022, Quantity ≥ 4)
 '''sql
@@ -100,7 +108,8 @@ SELECT *
 FROM retail_sales
 WHERE category = 'Clothing'
   AND DATE_FORMAT(sale_date, '%Y-%m') = '2022-11'
-  AND quantity >= 4; '''
+  AND quantity >= 4; 
+  '''
 
 🔹 Total Sales per Category
 '''sql
@@ -109,20 +118,23 @@ SELECT
     SUM(total_sale) AS net_sale,
     COUNT(*) AS total_orders
 FROM retail_sales
-GROUP BY category; '''
+GROUP BY category; 
+'''
 
 🔹 Average Age of Beauty Category Customers
 '''sql
 SELECT 
     ROUND(AVG(age), 2) AS avg_age
 FROM retail_sales
-WHERE category = 'Beauty'; '''
+WHERE category = 'Beauty'; 
+'''
 
 🔹 High-Value Transactions (> 1000)
 '''sql
 SELECT *
 FROM retail_sales
-WHERE total_sale > 1000; '''
+WHERE total_sale > 1000; 
+'''
 
 🔹 Transactions by Gender & Category
 '''sql
@@ -132,7 +144,8 @@ SELECT
     COUNT(*) AS total_transactions
 FROM retail_sales
 GROUP BY category, gender
-ORDER BY category; '''
+ORDER BY category; 
+'''
 
 🔹 Best Selling Month in Each Year (Average Sale)
 '''sql
@@ -152,7 +165,8 @@ FROM (
     FROM retail_sales
     GROUP BY YEAR(sale_date), MONTH(sale_date)
 ) t
-WHERE rnk = 1; '''
+WHERE rnk = 1; 
+'''
 
 🔹 Top 5 Customers by Total Sales
 '''sql
@@ -162,7 +176,8 @@ SELECT
 FROM retail_sales
 GROUP BY customer_id
 ORDER BY total_sales DESC
-LIMIT 5; '''
+LIMIT 5; 
+'''
 
 🔹 Unique Customers per Category
 '''sql
@@ -170,7 +185,8 @@ SELECT
     category,
     COUNT(DISTINCT customer_id) AS unique_customers
 FROM retail_sales
-GROUP BY category; '''
+GROUP BY category; 
+'''
 
 🔹 Sales Shift Analysis (Morning / Afternoon / Evening)
 '''sql
@@ -187,7 +203,8 @@ SELECT
     shift,
     COUNT(*) AS total_orders
 FROM hourly_sale
-GROUP BY shift; '''
+GROUP BY shift; 
+'''
 
 🔍 Key Findings
 
