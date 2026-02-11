@@ -6,8 +6,6 @@ Database: Sql_project_1
 
 This project demonstrates essential SQL skills and techniques commonly used by data analysts to explore, clean, and analyze retail sales data. The project covers database creation, data cleaning, exploratory data analysis (EDA), and answering real-world business questions using SQL.
 
-This project is ideal for beginners who want to build a strong foundation in SQL and understand how SQL is applied in business scenarios.
-
 🎯 Project Objectives
 
 Set up a retail sales database
