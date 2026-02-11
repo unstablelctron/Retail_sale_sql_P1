@@ -25,12 +25,14 @@ Gain hands-on experience with aggregations, window functions, and CTEs
 
 Database Creation
 
-''' CREATE DATABASE Sql_project_1; '''
+'''sql
+CREATE DATABASE Sql_project_1; '''
 
 
 Table Creation
 
-''' CREATE TABLE retail_sales
+'''sql
+CREATE TABLE retail_sales
 (
     transactions_id INT PRIMARY KEY,
     sale_date DATE,
@@ -49,22 +51,26 @@ Table Creation
 
 Total Records
 
-''' SELECT COUNT(*) FROM retail_sales; '''
+'''sql
+SELECT COUNT(*) FROM retail_sales; '''
 
 
 Unique Customers
 
-''' SELECT COUNT(DISTINCT customer_id) FROM retail_sales; '''
+'''sql
+SELECT COUNT(DISTINCT customer_id) FROM retail_sales; '''
 
 
 Unique Categories
 
-''' SELECT DISTINCT category FROM retail_sales; '''
+'''sql
+SELECT DISTINCT category FROM retail_sales; '''
 
 
 Null Value Check
 
-''' SELECT * 
+'''sql
+SELECT * 
 FROM retail_sales
 WHERE 
     sale_date IS NULL OR sale_time IS NULL OR customer_id IS NULL OR
@@ -74,7 +80,8 @@ WHERE
 
 Remove Records with Missing Data
 
-''' DELETE FROM retail_sales
+'''sql
+DELETE FROM retail_sales
 WHERE 
     sale_date IS NULL OR sale_time IS NULL OR customer_id IS NULL OR
     gender IS NULL OR age IS NULL OR category IS NULL OR
@@ -82,19 +89,22 @@ WHERE
 
 📈 Data Analysis & Business Questions
 🔹 Sales on a Specific Date
-''' SELECT *
+'''sql
+SELECT *
 FROM retail_sales
 WHERE sale_date = '2022-11-05'; '''
 
 🔹 Clothing Transactions (Nov 2022, Quantity ≥ 4)
-''' SELECT *
+'''sql
+SELECT *
 FROM retail_sales
 WHERE category = 'Clothing'
   AND DATE_FORMAT(sale_date, '%Y-%m') = '2022-11'
   AND quantity >= 4; '''
 
 🔹 Total Sales per Category
-''' SELECT 
+'''sql
+SELECT 
     category,
     SUM(total_sale) AS net_sale,
     COUNT(*) AS total_orders
@@ -102,18 +112,21 @@ FROM retail_sales
 GROUP BY category; '''
 
 🔹 Average Age of Beauty Category Customers
-''' SELECT 
+'''sql
+SELECT 
     ROUND(AVG(age), 2) AS avg_age
 FROM retail_sales
 WHERE category = 'Beauty'; '''
 
 🔹 High-Value Transactions (> 1000)
-''' SELECT *
+'''sql
+SELECT *
 FROM retail_sales
 WHERE total_sale > 1000; '''
 
 🔹 Transactions by Gender & Category
-''' SELECT 
+'''sql
+SELECT 
     category,
     gender,
     COUNT(*) AS total_transactions
@@ -122,7 +135,8 @@ GROUP BY category, gender
 ORDER BY category; '''
 
 🔹 Best Selling Month in Each Year (Average Sale)
-''' SELECT 
+'''sql
+SELECT 
     year,
     month,
     avg_sale
@@ -141,7 +155,8 @@ FROM (
 WHERE rnk = 1; '''
 
 🔹 Top 5 Customers by Total Sales
-''' SELECT 
+'''sql
+SELECT 
     customer_id,
     SUM(total_sale) AS total_sales
 FROM retail_sales
@@ -150,14 +165,16 @@ ORDER BY total_sales DESC
 LIMIT 5; '''
 
 🔹 Unique Customers per Category
+'''sql
 SELECT 
     category,
     COUNT(DISTINCT customer_id) AS unique_customers
 FROM retail_sales
-GROUP BY category;
+GROUP BY category; '''
 
 🔹 Sales Shift Analysis (Morning / Afternoon / Evening)
-''' WITH hourly_sale AS (
+'''sql
+WITH hourly_sale AS (
     SELECT *,
         CASE
             WHEN HOUR(sale_time) < 12 THEN 'Morning'
