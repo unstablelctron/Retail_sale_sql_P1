@@ -24,15 +24,15 @@ Gain hands-on experience with aggregations, window functions, and CTEs
 1️⃣ Database Setup
 
 Database Creation
+```sql
 
-'''sql
-CREATE DATABASE Sql_project_1; 
-'''
+CREATE DATABASE Sql_project_1;
+```
 
 
 Table Creation
 
-'''sql
+```sql
 CREATE TABLE retail_sales
 (
     transactions_id INT PRIMARY KEY,
@@ -47,97 +47,97 @@ CREATE TABLE retail_sales
     cogs FLOAT,
     total_sale FLOAT
 ); 
-'''
+```
 
 2️⃣ Data Exploration & Cleaning
 
 Total Records
 
-'''sql
+```sql
 SELECT COUNT(*) FROM retail_sales; 
-'''
+```
 
 
 Unique Customers
 
-'''sql
+```sql
 SELECT COUNT(DISTINCT customer_id) FROM retail_sales; 
-'''
+```
 
 
 Unique Categories
 
-'''sql
+```sql
 SELECT DISTINCT category FROM retail_sales; 
-'''
+```
 
 
 Null Value Check
 
-'''sql
+```sql
 SELECT * 
 FROM retail_sales
 WHERE 
     sale_date IS NULL OR sale_time IS NULL OR customer_id IS NULL OR
     gender IS NULL OR age IS NULL OR category IS NULL OR
     quantity IS NULL OR price_per_unit IS NULL OR cogs IS NULL; 
-    '''
+```
 
 
 Remove Records with Missing Data
 
-'''sql
+```sql
 DELETE FROM retail_sales
 WHERE 
     sale_date IS NULL OR sale_time IS NULL OR customer_id IS NULL OR
     gender IS NULL OR age IS NULL OR category IS NULL OR
-    quantity IS NULL OR price_per_unit IS NULL OR cogs IS NULL; 
-    '''
+    quantity IS NULL OR price_per_unit IS NULL OR cogs IS NULL;
+```
 
 📈 Data Analysis & Business Questions
 🔹 Sales on a Specific Date
-'''sql
+```sql
 SELECT *
 FROM retail_sales
 WHERE sale_date = '2022-11-05'; 
-'''
+```
 
 🔹 Clothing Transactions (Nov 2022, Quantity ≥ 4)
-'''sql
+```sql
 SELECT *
 FROM retail_sales
 WHERE category = 'Clothing'
   AND DATE_FORMAT(sale_date, '%Y-%m') = '2022-11'
   AND quantity >= 4; 
-  '''
+```
 
 🔹 Total Sales per Category
-'''sql
+```sql
 SELECT 
     category,
     SUM(total_sale) AS net_sale,
     COUNT(*) AS total_orders
 FROM retail_sales
 GROUP BY category; 
-'''
+```
 
 🔹 Average Age of Beauty Category Customers
-'''sql
+```sql
 SELECT 
     ROUND(AVG(age), 2) AS avg_age
 FROM retail_sales
 WHERE category = 'Beauty'; 
-'''
+```
 
 🔹 High-Value Transactions (> 1000)
-'''sql
+```sql
 SELECT *
 FROM retail_sales
 WHERE total_sale > 1000; 
-'''
+```
 
 🔹 Transactions by Gender & Category
-'''sql
+```sql
 SELECT 
     category,
     gender,
@@ -145,10 +145,10 @@ SELECT
 FROM retail_sales
 GROUP BY category, gender
 ORDER BY category; 
-'''
+```
 
 🔹 Best Selling Month in Each Year (Average Sale)
-'''sql
+```sql
 SELECT 
     year,
     month,
@@ -166,10 +166,10 @@ FROM (
     GROUP BY YEAR(sale_date), MONTH(sale_date)
 ) t
 WHERE rnk = 1; 
-'''
+```
 
 🔹 Top 5 Customers by Total Sales
-'''sql
+```sql
 SELECT 
     customer_id,
     SUM(total_sale) AS total_sales
@@ -177,19 +177,19 @@ FROM retail_sales
 GROUP BY customer_id
 ORDER BY total_sales DESC
 LIMIT 5; 
-'''
+```
 
 🔹 Unique Customers per Category
-'''sql
+```sql
 SELECT 
     category,
     COUNT(DISTINCT customer_id) AS unique_customers
 FROM retail_sales
 GROUP BY category; 
-'''
+```
 
 🔹 Sales Shift Analysis (Morning / Afternoon / Evening)
-'''sql
+```sql
 WITH hourly_sale AS (
     SELECT *,
         CASE
@@ -204,7 +204,7 @@ SELECT
     COUNT(*) AS total_orders
 FROM hourly_sale
 GROUP BY shift; 
-'''
+```
 
 🔍 Key Findings
 
@@ -246,18 +246,8 @@ GitHub
 
 👤 Author
 
-Mayank Mishra
+Anand Pathak
 Aspiring Data Analyst
 Skilled in SQL, Data Analysis, and Business Insights
-
-🚀 How to Use This Project
-
-Clone the repository from GitHub
-
-Create the database using the provided SQL scripts
-
-Run analysis queries to explore insights
-
-Modify queries to explore additional business questions
 
 📌 This project is part of my data analytics portfolio and showcases SQL skills essential for entry-level Data Analyst roles.
